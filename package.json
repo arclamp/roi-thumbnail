@@ -6,7 +6,7 @@
     "start": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "deploy": "yarn run build && gh-pages -add -d dist"
+    "deploy": "yarn run build && gh-pages -d dist"
   },
   "dependencies": {
     "d3-scale": "^2.1.2",
