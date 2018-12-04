@@ -54,13 +54,11 @@ export default {
 
     mode (mode) {
       if (mode === 'selection') {
-        // Hide the time index and highlight whatever trace is currently focused.
+        // Hide the time index.
         this.hideTimeIndex();
-        this.setFocus(this.focus);
       } else {
-        // Show the time index and turn off trace highlighting.
+        // Show the time index.
         this.showTimeIndex();
-        this.setFocus(null);
       }
     },
 
@@ -90,7 +88,7 @@ export default {
       select(this.$el)
         .selectAll('path')
         .each(function (d, i) {
-          if (i === focus) {
+          if (focus.indexOf(i) > -1) {
             select(this)
               .attr('stroke', 'green')
               .attr('stroke-width', 3);
@@ -147,10 +145,8 @@ export default {
       .append('g')
       .classed('dff', true)
       .attr('transform', (d, i) => `translate(0, ${i * 512 / 50})`)
-      .on('mouseover', function (d, i) {
-        if (that.mode === 'selection') {
-          that.$store.commit('focus', i);
-        }
+      .on('click', function (d, i) {
+        that.$store.commit('toggle', i);
       });
 
     // Create mouse target elements for interaction.
