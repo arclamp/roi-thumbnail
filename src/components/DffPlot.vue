@@ -60,7 +60,7 @@ export default {
       } else {
         // Show the time index and turn off trace highlighting.
         this.showTimeIndex();
-        this.setFocus(null);
+        this.setFocus([]);
       }
     },
 
@@ -90,7 +90,7 @@ export default {
       select(this.$el)
         .selectAll('path')
         .each(function (d, i) {
-          if (i === focus) {
+          if (focus.indexOf(i) > -1) {
             select(this)
               .attr('stroke', 'green')
               .attr('stroke-width', 3);
@@ -147,9 +147,9 @@ export default {
       .append('g')
       .classed('dff', true)
       .attr('transform', (d, i) => `translate(0, ${i * 512 / 50})`)
-      .on('mouseover', function (d, i) {
+      .on('click', function (d, i) {
         if (that.mode === 'selection') {
-          that.$store.commit('focus', i);
+          that.$store.commit('toggle', i);
         }
       });
 

@@ -55,10 +55,10 @@ export default {
       this.img.clear(0, 0, 0, 255);
 
       if (mode === 'selection') {
-        this.setFocus(this.focus, null);
         this.drawSelectionROIs();
+        this.setFocus(this.focus, []);
       } else {
-        this.setFocus(null, this.focus);
+        this.setFocus([], this.focus);
         this.drawIntensityROIs();
       }
 
@@ -131,21 +131,21 @@ export default {
     },
 
     setFocus (newFocus, oldFocus) {
-      if (oldFocus !== null) {
-        this.drawROI(oldFocus, {
+      oldFocus.forEach(d => {
+        this.drawROI(d, {
           r: 100,
           g: 100,
           b: 100
         });
-      }
+      });
 
-      if (newFocus !== null) {
-        this.drawROI(newFocus, {
+      newFocus.forEach(d => {
+        this.drawROI(d, {
           r: 0,
           g: 255,
           b: 0
         });
-      }
+      });
 
       this.img.update();
     },
@@ -169,7 +169,9 @@ loop:
             }
           }
 
-          this.$store.commit('focus', i < 50 ? i : null);
+          if (i < 50) {
+            this.$store.commit('toggle', i);
+          }
         }, 0);
       }
     }
