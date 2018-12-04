@@ -117,6 +117,16 @@ export default {
       }
     },
 
+    drawSelectionROI (which, focused) {
+      const focusColor = { r: 0, g: 255, b: 0 };
+      const brightColor = { r: 100, g: 100, b: 100 };
+      const darkColor = { r: 50, g: 50, b: 50 };
+
+      const color = focused ? focusColor : (which < 50 ? brightColor : darkColor);
+
+      this.drawROI(which, color, false);
+    },
+
     drawIntensityROIs () {
       const dff = this.dff;
       const timeIndex = this.timeIndex;
@@ -137,49 +147,50 @@ export default {
     },
 
     setFocus (newFocus, oldFocus) {
+      const mode = this.mode;
+      const dff = this.dff;
+      const timeIndex = this.timeIndex;
       oldFocus.forEach(d => {
-        this.drawROI(d, {
-          r: 100,
-          g: 100,
-          b: 100
-        });
+        if (mode === 'selection') {
+          this.drawSelectionROI(d, false);
+        } else {
+          this.drawIntensityROI(d, dff[d][timeIndex], false);
+        }
       });
 
       newFocus.forEach(d => {
-        this.drawROI(d, {
-          r: 0,
-          g: 255,
-          b: 0
-        });
+        if (mode === 'selection') {
+          this.drawSelectionROI(d, true);
+        } else {
+          this.drawIntensityROI(d, dff[d][timeIndex], true);
+        }
       });
 
       this.img.update();
     },
 
     click () {
-      if (this.mode === 'selection') {
-        // Time out here to give canvas element a chance to pick up the mouse
-        // click and record its coordinates.
-        window.setTimeout(() => {
-          const mouse = this.img.click;
+      // Time out here to give canvas element a chance to pick up the mouse
+      // click and record its coordinates.
+      window.setTimeout(() => {
+        const mouse = this.img.click;
 
-          // Find a match.
-          const rois = this.rois;
-          let i;
+        // Find a match.
+        const rois = this.rois;
+        let i;
 loop:
-          for (i = 0; i < rois.length; i++) {
-            for (let j = 0; j < rois[i].length; j++) {
-              if (rois[i][j][0] === mouse.x && rois[i][j][1] === mouse.y) {
-                break loop;
-              }
+        for (i = 0; i < rois.length; i++) {
+          for (let j = 0; j < rois[i].length; j++) {
+            if (rois[i][j][0] === mouse.x && rois[i][j][1] === mouse.y) {
+              break loop;
             }
           }
+        }
 
-          if (i < 50) {
-            this.$store.commit('toggle', i);
-          }
-        }, 0);
-      }
+        if (i < 50) {
+          this.$store.commit('toggle', i);
+        }
+      }, 0);
     }
   }
 }

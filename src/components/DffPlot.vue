@@ -146,9 +146,7 @@ export default {
       .classed('dff', true)
       .attr('transform', (d, i) => `translate(0, ${i * 512 / 50})`)
       .on('click', function (d, i) {
-        if (that.mode === 'selection') {
-          that.$store.commit('toggle', i);
-        }
+        that.$store.commit('toggle', i);
       });
 
     // Create mouse target elements for interaction.
