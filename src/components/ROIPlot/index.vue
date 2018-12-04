@@ -120,14 +120,20 @@ export default {
     drawIntensityROIs () {
       const dff = this.dff;
       const timeIndex = this.timeIndex;
+      const focus = this.focus;
       for (let i = 0; i < 50; i++) {
-        const color = this.intensity(dff[i][timeIndex]);
-        this.drawROI(i, {
-          r: color,
-          g: color,
-          b: color
-        }, false);
+        const focused = focus.indexOf(i) > -1;
+        this.drawIntensityROI(i, dff[i][timeIndex], focused);
       }
+    },
+
+    drawIntensityROI (which, value, focused) {
+      const color = this.intensity(value);
+      this.drawROI(which, {
+        r: focused ? 0 : color,
+        g: color,
+        b: focused ? 0 : color,
+      }, false);
     },
 
     setFocus (newFocus, oldFocus) {

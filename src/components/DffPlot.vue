@@ -54,13 +54,11 @@ export default {
 
     mode (mode) {
       if (mode === 'selection') {
-        // Hide the time index and highlight whatever trace is currently focused.
+        // Hide the time index.
         this.hideTimeIndex();
-        this.setFocus(this.focus);
       } else {
-        // Show the time index and turn off trace highlighting.
+        // Show the time index.
         this.showTimeIndex();
-        this.setFocus([]);
       }
     },
 
