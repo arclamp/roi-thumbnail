@@ -14,11 +14,16 @@
       <br>
       <span>Time index: {{ Math.floor(timeIndex * 56.8025987006) }}</span>
     </div>
-
+    <br>
+    <button id="clear">
+      Clear selection
+    </button>
   </div>
 </template>
 
 <script>
+import { select } from 'd3-selection';
+
 import DffPlot from '@/components/DffPlot';
 import ROIPlot from '@/components/ROIPlot'
 
@@ -42,6 +47,12 @@ export default {
       mode: 'selection',
       timeIndex: 0
     };
+  },
+  mounted () {
+    select('#clear')
+      .on('click', () => {
+        this.$store.commit('focus', []);
+      });
   }
 }
 </script>
