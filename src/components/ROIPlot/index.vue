@@ -6,7 +6,7 @@
 
 <script>
 import { scalePow } from 'd3-scale';
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 
 import CanvasImage from './CanvasImage';
 import { minmax } from '@/util';
@@ -79,6 +79,10 @@ export default {
   },
 
   methods: {
+    ...mapMutations([
+      'toggle'
+    ]),
+
     drawROI (which, color, update) {
       const rois = this.rois;
       for (let j = 0; j < rois[which].length; j++) {
@@ -175,7 +179,7 @@ loop:
         }
 
         if (i < 50) {
-          this.$store.commit('toggle', i);
+          this.toggle(i);
         }
       }, 0);
     }

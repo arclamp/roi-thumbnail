@@ -11,7 +11,7 @@ import { select } from 'd3-selection';
 import { scaleLinear, scaleOrdinal } from 'd3-scale';
 import { schemePastel1 } from 'd3-scale-chromatic';
 import { line as d3line } from 'd3-shape';
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 
 export default {
   name: 'DffPlot',
@@ -65,6 +65,10 @@ export default {
   },
 
   methods: {
+    ...mapMutations([
+      'toggle'
+    ]),
+
     hideTimeIndex () {
       select(this.$el)
         .select('line.time-index')
@@ -148,7 +152,7 @@ export default {
       .classed('dff', true)
       .attr('transform', (d, i) => `translate(0, ${i * 512 / 50})`)
       .on('click', function (d, i) {
-        that.$store.commit('toggle', i);
+        that.toggle(i);
       });
 
     // Create mouse target elements for interaction.
