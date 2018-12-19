@@ -6,6 +6,7 @@
 
 <script>
 import { scalePow } from 'd3-scale';
+import { mapState } from 'vuex';
 
 import CanvasImage from './CanvasImage';
 import { minmax } from '@/util';
@@ -13,38 +14,23 @@ import { minmax } from '@/util';
 export default {
   name: 'ROIPlot',
   computed: {
-    width () {
-      return this.$store.state.roiPlot.width;
-    },
+    ...mapState([
+      'rois',
+      'dff',
+      'timeIndex',
+      'focus',
+      'mode',
+    ]),
 
-    height () {
-      return this.$store.state.roiPlot.height;
-    },
-
-    rois () {
-      return this.$store.state.rois;
-    },
-
-    dff () {
-      return this.$store.state.dff;
-    },
+    ...mapState({
+      width: (state) => state.roiPlot.width,
+      height: (state) => state.roiPlot.height,
+    }),
 
     dffRange () {
       const dff = this.dff;
       return minmax(dff);
     },
-
-    timeIndex () {
-      return this.$store.state.timeIndex;
-    },
-
-    focus () {
-      return this.$store.state.focus;
-    },
-
-    mode () {
-      return this.$store.state.mode;
-    }
   },
   watch: {
     focus (newFocus, oldFocus) {
@@ -70,6 +56,7 @@ export default {
       this.img.update();
     }
   },
+
   mounted () {
     const el = this.$el;
     const canvas = el.getElementsByTagName('canvas')[0];

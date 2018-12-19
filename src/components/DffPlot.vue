@@ -11,16 +11,18 @@ import { select } from 'd3-selection';
 import { scaleLinear, scaleOrdinal } from 'd3-scale';
 import { schemePastel1 } from 'd3-scale-chromatic';
 import { line as d3line } from 'd3-shape';
+import { mapState } from 'vuex';
 
 export default {
   name: 'DffPlot',
   computed: {
-    dff () {
-      return this.$store.state.dff;
-    },
-    focus () {
-      return this.$store.state.focus;
-    },
+    ...mapState([
+      'dff',
+      'focus',
+      'mode',
+      'timeIndex'
+    ]),
+
     epochs () {
       const raw = this.$store.state.epochs;
       let data = [];
@@ -40,13 +42,8 @@ export default {
 
       return data;
     },
-    mode () {
-      return this.$store.state.mode;
-    },
-    timeIndex () {
-      return this.$store.state.timeIndex;
-    }
   },
+
   watch: {
     focus (focus) {
       this.setFocus(focus);
@@ -66,17 +63,20 @@ export default {
       this.moveTimeIndex(idx);
     }
   },
+
   methods: {
     hideTimeIndex () {
       select(this.$el)
         .select('line.time-index')
         .style('opacity', 0);
     },
+
     showTimeIndex () {
       select(this.$el)
         .select('line.time-index')
         .style('opacity', 1);
     },
+
     moveTimeIndex (idx) {
       const x = this.x(idx);
       select(this.$el)
@@ -84,6 +84,7 @@ export default {
         .attr('x1', x)
         .attr('x2', x);
     },
+
     setFocus (focus) {
       select(this.$el)
         .selectAll('path')
@@ -100,6 +101,7 @@ export default {
         });
     }
   },
+
   mounted () {
     // Collect the first 50 traces and their value range.
     const data = this.dff;
