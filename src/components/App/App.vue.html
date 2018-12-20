@@ -8,7 +8,7 @@
   <input type="radio" id="time" value="time" v-model="mode">
   <label for="time">Time Mode</label>
   <br>
-  <div v-if="mode === 'time'">
+  <div v-show="mode === 'time'">
     <input type="range" id="timeindex" min="0" max="2001" v-model="timeIndex">
     <br>
     <span>Time index: {{ Math.floor(timeIndex * 56.8025987006) }}</span>
