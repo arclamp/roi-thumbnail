@@ -8,6 +8,10 @@ import { mapState, mapMutations } from 'vuex';
 
 export default {
   name: 'DffPlot',
+  props: {
+    width: Number,
+    height: Number
+  },
   computed: {
     ...mapState([
       'dff',

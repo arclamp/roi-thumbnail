@@ -28,7 +28,9 @@ export default {
   data () {
     return {
       mode: 'selection',
-      timeIndex: 0
+      timeIndex: 0,
+      width: 1024,
+      height: 512
     };
   },
   mounted () {

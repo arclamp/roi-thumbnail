@@ -5,10 +5,6 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   state: {
-    roiPlot: {
-      width: 0,
-      height: 0
-    },
     rois: [],
     dff: [],
     epochs: [],
@@ -19,11 +15,6 @@ export const store = new Vuex.Store({
   mutations: {
     setData (state, { which, data }) {
       state[which] = data;
-    },
-
-    setROISize (state, dim) {
-      state.roiPlot.width = dim.width;
-      state.roiPlot.height = dim.height;
     },
 
     focus (state, which) {

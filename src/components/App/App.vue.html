@@ -1,6 +1,6 @@
 <div id="app">
-  <DffPlot />
-  <ROIPlot />
+  <DffPlot :width="width / 2" :height="height" />
+  <ROIPlot :width="width / 2" :height="height" />
 
   <input type="radio" id="selection" value="selection" v-model="mode">
   <label for="selection">Selection Mode</label>

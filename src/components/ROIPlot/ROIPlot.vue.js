@@ -6,6 +6,10 @@ import { minmax } from '@/util';
 
 export default {
   name: 'ROIPlot',
+  props: {
+    width: Number,
+    height: Number
+  },
   computed: {
     ...mapState([
       'rois',
@@ -14,11 +18,6 @@ export default {
       'focus',
       'mode',
     ]),
-
-    ...mapState({
-      width: (state) => state.roiPlot.width,
-      height: (state) => state.roiPlot.height,
-    }),
 
     dffRange () {
       const dff = this.dff;

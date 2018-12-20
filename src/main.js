@@ -18,11 +18,6 @@ async function main () {
   const epochReq = json('data/stim_epoch.json');
   const [rois, dff, epochs] = [await roisReq, await dffReq, await epochReq];
 
-  store.commit('setROISize', {
-    width: 512,
-    height: 512
-  });
-
   store.commit('setData', {
     which: 'rois',
     data: rois
