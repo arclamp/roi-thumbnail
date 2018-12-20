@@ -1,10 +1,3 @@
-<template>
-  <div style="float:left;">
-    <svg width="512" height="512" xmlns="http://www.w3.org/2000/svg"></svg>
-  </div>
-</template>
-
-<script>
 import { minmax } from '@/util';
 
 import { select } from 'd3-selection';
@@ -188,5 +181,3 @@ export default {
       .style('opacity', 0);
   }
 };
-
-</script>
