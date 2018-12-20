@@ -50,10 +50,7 @@ export default {
   },
 
   mounted () {
-    const el = this.$el;
-    const canvas = el.getElementsByTagName('canvas')[0];
-
-    this.img = new CanvasImage(canvas, {
+    this.img = new CanvasImage(this.$refs.canvas, {
       width: this.width,
       height: this.height
     });

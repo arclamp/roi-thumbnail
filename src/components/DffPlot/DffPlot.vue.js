@@ -122,8 +122,7 @@ export default {
       .x((d, i) => x(i))
       .y(y);
 
-    const svg = select(this.$el)
-      .select('svg');
+    const svg = select(this.$refs.svg);
 
     // Place rects behind the plots to show the epochs.
     const epochs = this.epochs;
