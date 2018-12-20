@@ -1,4 +1,5 @@
 import { select } from 'd3-selection';
+import { mapMutations } from 'vuex';
 
 import DffPlot from '@/components/DffPlot';
 import ROIPlot from '@/components/ROIPlot';
@@ -11,12 +12,18 @@ export default {
   },
   watch: {
     mode: function (mode) {
-      this.$store.commit('mode', mode);
+      this.setMode(mode);
     },
 
     timeIndex (val) {
-      this.$store.commit('timeIndex', val);
+      this.setTimeIndex(val);
     }
+  },
+  methods: {
+    ...mapMutations({
+      setMode: 'mode',
+      setTimeIndex: 'timeIndex'
+    })
   },
   data () {
     return {
