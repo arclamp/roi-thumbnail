@@ -9,15 +9,6 @@ export default class CanvasImage {
     this.ctx = this.el.getContext('2d');
 
     this.img = this.ctx.createImageData(this.width, this.height);
-
-    select(this.el)
-      .on('click', () => {
-        const rect = event.target.getBoundingClientRect();
-        this.click = {
-          x: event.clientX - rect.left,
-          y: event.clientY - rect.top
-        }
-      });
   }
 
   clear (r, g, b, a, { update = true } = {}) {

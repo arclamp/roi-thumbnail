@@ -149,28 +149,32 @@ export default {
       this.img.update();
     },
 
-    click () {
-      // Time out here to give canvas element a chance to pick up the mouse
-      // click and record its coordinates.
-      window.setTimeout(() => {
-        const mouse = this.img.click;
+    clickCoords (evt) {
+      const rect = evt.target.getBoundingClientRect();
+      return {
+        x: evt.clientX - rect.left,
+        y: evt.clientY - rect.top,
+      };
+    },
 
-        // Find a match.
-        const rois = this.rois;
-        let i;
+    click (evt) {
+      const mouse = this.clickCoords(evt);
+
+      // Find a match.
+      const rois = this.rois;
+      let i;
 loop:
-        for (i = 0; i < rois.length; i++) {
-          for (let j = 0; j < rois[i].length; j++) {
-            if (rois[i][j][0] === mouse.x && rois[i][j][1] === mouse.y) {
-              break loop;
-            }
+      for (i = 0; i < rois.length; i++) {
+        for (let j = 0; j < rois[i].length; j++) {
+          if (rois[i][j][0] === mouse.x && rois[i][j][1] === mouse.y) {
+            break loop;
           }
         }
+      }
 
-        if (i < 50) {
-          this.toggle(i);
-        }
-      }, 0);
+      if (i < 50) {
+        this.toggle(i);
+      }
     }
   }
 }
