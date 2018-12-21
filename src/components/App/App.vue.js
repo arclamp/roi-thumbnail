@@ -10,6 +10,10 @@ export default {
     DffPlot,
     ROIPlot
   },
+  props: {
+    width: Number,
+    height: Number
+  },
   watch: {
     mode: function (mode) {
       this.setMode(mode);
@@ -29,8 +33,6 @@ export default {
     return {
       mode: 'selection',
       timeIndex: 0,
-      width: 1024,
-      height: 512
     };
   },
   mounted () {

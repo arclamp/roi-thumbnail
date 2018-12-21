@@ -35,7 +35,12 @@ async function main () {
 
   new Vue({
     store,
-    render: h => h(App),
+    render: h => h(App, {
+      props: {
+        width: 1024,
+        height: 512
+      }
+    }),
   }).$mount('#app')
 }
 
