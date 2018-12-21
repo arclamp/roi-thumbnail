@@ -1,5 +1,3 @@
-import { select } from 'd3-selection';
-
 export default class CanvasImage {
   constructor (el, {width, height}) {
     this.el = el;

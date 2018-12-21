@@ -5,7 +5,7 @@ import CanvasImage from './CanvasImage';
 import { minmax } from '@/util';
 
 export default {
-  name: 'ROIPlot',
+  name: 'roi-plot',
   props: {
     width: Number,
     height: Number

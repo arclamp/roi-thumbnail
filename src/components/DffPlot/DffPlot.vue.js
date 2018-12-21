@@ -7,7 +7,7 @@ import { line as d3line } from 'd3-shape';
 import { mapState, mapMutations } from 'vuex';
 
 export default {
-  name: 'DffPlot',
+  name: 'dff-plot',
   props: {
     width: Number,
     height: Number

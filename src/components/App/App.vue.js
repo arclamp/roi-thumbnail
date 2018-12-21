@@ -2,13 +2,13 @@ import { select } from 'd3-selection';
 import { mapMutations } from 'vuex';
 
 import DffPlot from '@/components/DffPlot';
-import ROIPlot from '@/components/ROIPlot';
+import RoiPlot from '@/components/RoiPlot';
 
 export default {
   name: 'app',
   components: {
     DffPlot,
-    ROIPlot
+    RoiPlot
   },
   props: {
     width: Number,
