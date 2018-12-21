@@ -1,4 +1,3 @@
-import { select } from 'd3-selection';
 import { mapMutations } from 'vuex';
 
 import DffPlot from '@/components/DffPlot';
@@ -27,7 +26,11 @@ export default {
     ...mapMutations({
       setMode: 'mode',
       setTimeIndex: 'timeIndex'
-    })
+    }),
+
+    clearSelection () {
+      this.$store.commit('focus', []);
+    }
   },
   data () {
     return {
@@ -35,10 +38,4 @@ export default {
       timeIndex: 0,
     };
   },
-  mounted () {
-    select('#clear')
-      .on('click', () => {
-        this.$store.commit('focus', []);
-      });
-  }
 }
